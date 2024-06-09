@@ -15,10 +15,12 @@ depends=('glibc')
 makedepends=("go" "git")
 options=("!lto")
 source=("git+https://github.com/helm/helm.git#tag=v${pkgver}?signed")
-validpgpkeys=('672C657BE06B4B30969C4A57461449C25E36B98E'
-              'CABAA8D44DFACA14791FBE9892C44A3D421FF7F9'
-              '967F8AC5E2216F9F4FD270AD92AA783CBAAE8E3B'
-              'F1261BDE929012C8FF2E501D6EA5D7598529A53E')
+validpgpkeys=(
+  '672C657BE06B4B30969C4A57461449C25E36B98E'
+  'CABAA8D44DFACA14791FBE9892C44A3D421FF7F9'
+  '967F8AC5E2216F9F4FD270AD92AA783CBAAE8E3B'
+  'F1261BDE929012C8FF2E501D6EA5D7598529A53E'
+)
 sha256sums=('b03f5238f924d10872e453d58442b1fd493a321aff4b70178e9a94a47e1338e4')
 
 pkgver() {
@@ -32,27 +34,27 @@ prepare() {
 }
 
 build() {
-    cd "${pkgname}"
-    export CGO_LDFLAGS="$LDFLAGS"
-    export CGO_CFLAGS="$CFLAGS"
-    export CGO_CXXFLAGS="$CXXFLAGS"
-    export CGO_CPPFLAGS="$CPPFLAGS"
-    export CGO_ENABLED=1
-    make EXT_LDFLAGS="-linkmode external" GOFLAGS="-buildmode=pie -trimpath"
+  cd "${pkgname}"
+  export CGO_LDFLAGS="$LDFLAGS"
+  export CGO_CFLAGS="$CFLAGS"
+  export CGO_CXXFLAGS="$CXXFLAGS"
+  export CGO_CPPFLAGS="$CPPFLAGS"
+  export CGO_ENABLED=1
+  make EXT_LDFLAGS="-linkmode external" GOFLAGS="-buildmode=pie -trimpath"
 }
 
-check(){
-    cd "${pkgname}"
-    export CGO_LDFLAGS="$LDFLAGS"
-    export CGO_CFLAGS="$CFLAGS"
-    export CGO_CXXFLAGS="$CXXFLAGS"
-    export CGO_CPPFLAGS="$CPPFLAGS"
-    make LDFLAGS="-s -w -linkmode external" GOFLAGS="-buildmode=pie -trimpath" test-unit || true
+check() {
+  cd "${pkgname}"
+  export CGO_LDFLAGS="$LDFLAGS"
+  export CGO_CFLAGS="$CFLAGS"
+  export CGO_CXXFLAGS="$CXXFLAGS"
+  export CGO_CPPFLAGS="$CPPFLAGS"
+  make LDFLAGS="-s -w -linkmode external" GOFLAGS="-buildmode=pie -trimpath" test-unit || true
 }
 
-package(){
-    cd "${pkgname}"
-    install -Dm755 bin/helm -t "$pkgdir/usr/bin"
-    bin/helm completion bash | install -Dm644 /dev/stdin "$pkgdir/usr/share/bash-completion/completions/helm"
-    bin/helm completion zsh | install -Dm644 /dev/stdin "$pkgdir/usr/share/zsh/site-functions/_helm"
+package() {
+  cd "${pkgname}"
+  install -Dm755 bin/helm -t "$pkgdir/usr/bin"
+  bin/helm completion bash | install -Dm644 /dev/stdin "$pkgdir/usr/share/bash-completion/completions/helm"
+  bin/helm completion zsh | install -Dm644 /dev/stdin "$pkgdir/usr/share/zsh/site-functions/_helm"
 }
