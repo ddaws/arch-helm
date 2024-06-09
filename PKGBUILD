@@ -23,11 +23,6 @@ validpgpkeys=(
 )
 sha256sums=('b03f5238f924d10872e453d58442b1fd493a321aff4b70178e9a94a47e1338e4')
 
-pkgver() {
-  cd "${pkgname}"
-  git describe --tags | sed 's/^v//;s/-/+/g'
-}
-
 prepare() {
   cd "${pkgname}"
   go mod tidy -compat=1.17
