@@ -16,10 +16,10 @@ makedepends=("go" "git")
 options=("!lto")
 source=("git+https://github.com/helm/helm.git#tag=v${pkgver}?signed")
 validpgpkeys=(
-  '672C657BE06B4B30969C4A57461449C25E36B98E'
-  'CABAA8D44DFACA14791FBE9892C44A3D421FF7F9'
-  '967F8AC5E2216F9F4FD270AD92AA783CBAAE8E3B'
-  'F1261BDE929012C8FF2E501D6EA5D7598529A53E'
+  '672C657BE06B4B30969C4A57461449C25E36B98E' # Matthew Farina <matt@mattfarina.com>
+  'CABAA8D44DFACA14791FBE9892C44A3D421FF7F9' # Matthew Farina <matt.farina@rancher.com>
+  '967F8AC5E2216F9F4FD270AD92AA783CBAAE8E3B' # Matthew Fisher <matt.fisher@microsoft.com>
+  'F1261BDE929012C8FF2E501D6EA5D7598529A53E' # Martin Hickey <martin.hickey@ie.ibm.com>
 )
 sha256sums=('b03f5238f924d10872e453d58442b1fd493a321aff4b70178e9a94a47e1338e4')
 
